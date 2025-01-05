@@ -1,16 +1,21 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { TaskProvider } from "./context/TaskContext";
-import TaskList from "./pages/TaskList";
+import Navbar from "./components/Navbar";
+import WelcomePage from "./pages/WelcomePage";
+import TaskForm from "./pages/TaskForm";
 import CalendarView from "./pages/CalendarView";
 
 const App = () => {
   return (
     <TaskProvider>
       <Router>
+        <Navbar />
         <Routes>
-          <Route path="/" element={<TaskList />} />
+          <Route path="/" element={<WelcomePage />} />
+          <Route path="/crud" element={<TaskForm />} />
           <Route path="/calendar" element={<CalendarView />} />
+          <Route path="/about" element={<div>Tus datos</div>} />
         </Routes>
       </Router>
     </TaskProvider>
