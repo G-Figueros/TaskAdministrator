@@ -1,51 +1,72 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import {
   Box,
   Flex,
-  Spacer,
-  Button,
   HStack,
-  IconButton,
+  Image,
   useColorMode,
+  IconButton,
 } from "@chakra-ui/react";
 import { SunIcon, MoonIcon } from "@chakra-ui/icons";
 
 const Navbar = () => {
   const { colorMode, toggleColorMode } = useColorMode();
 
+  const navItems = [
+    { name: "Gestión de Tareas", path: "/crud" },
+    { name: "Calendario", path: "/calendar" },
+    { name: "Acerca de", path: "/about" },
+  ];
+
   return (
-    <Flex bg="blue.500" p={4} color="white" align="center">
-      {/* Root pages */}
-      <HStack spacing={4}>
-        <Link to="/">
-          <Button variant="link" color="white">
-            Inicio
-          </Button>
-        </Link>
-        <Link to="/crud">
-          <Button variant="link" color="white">
-            Gestión de Tareas
-          </Button>
-        </Link>
-        <Link to="/calendar">
-          <Button variant="link" color="white">
-            Calendario
-          </Button>
-        </Link>
-        <Link to="/about">
-          <Button variant="link" color="white">
-            Mis Datos
-          </Button>
-        </Link>
+    <Flex
+      bg={colorMode === "light" ? "primary.light" : "primary.dark"}
+      p={4}
+      color={colorMode === "light" ? "text.light" : "text.dark"}
+      align="center"
+      justify="space-between"
+      position="relative"
+    >
+     <NavLink to="/">
+        <Image
+          src="/src/assets/HomeIcon.png"
+          alt="Inicio"
+          width="80px" 
+          height="auto" 
+          borderRadius="full"
+          cursor="pointer"
+        />
+      </NavLink>
+
+      <HStack spacing={8} justify="center" flex={1}>
+        {navItems.map((item) => (
+          <NavLink
+            key={item.name}
+            to={item.path}
+            style={({ isActive }) => ({
+              padding: "8px 16px",
+              borderRadius: "20px",
+              textDecoration: "none",
+              backgroundColor: isActive
+                ? colorMode === "light"
+                  ? "rgba(128, 90, 213, 0.2)" 
+                  : "rgba(213, 63, 140, 0.2)"
+                : "transparent",
+              color: "inherit",
+              fontWeight: isActive ? "bold" : "normal",
+            })}
+          >
+            {item.name}
+          </NavLink>
+        ))}
       </HStack>
-      <Spacer />
-      {/* Pendiente trabajar en modo oscuro y claro del app */}
+
       <IconButton
         aria-label="Toggle theme"
         icon={colorMode === "light" ? <MoonIcon /> : <SunIcon />}
         onClick={toggleColorMode}
-        colorScheme="teal"
+        colorScheme={colorMode === "light" ? "purple" : "pink"}
       />
     </Flex>
   );

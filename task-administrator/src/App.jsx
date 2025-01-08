@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import WelcomePage from "./pages/WelcomePage";
 import TaskForm from "./pages/TaskForm";
 import CalendarView from "./pages/CalendarView";
+import AboutPage from "./pages/AboutPage";
 
 const App = () => {
   return (
@@ -15,7 +16,7 @@ const App = () => {
           <Route path="/" element={<WelcomePage />} />
           <Route path="/crud" element={<TaskForm />} />
           <Route path="/calendar" element={<CalendarView />} />
-          <Route path="/about" element={<div>Tus datos</div>} />
+          <Route path="/about" element={<AboutPage />} />
         </Routes>
       </Router>
     </TaskProvider>

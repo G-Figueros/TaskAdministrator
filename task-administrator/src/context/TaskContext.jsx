@@ -1,3 +1,11 @@
+import React, { createContext, useReducer, useEffect } from "react";
+
+const TaskContext = createContext();
+
+const initialState = {
+  tasks: JSON.parse(localStorage.getItem("tasks")) || [],
+};
+
 function taskReducer(state, action) {
   switch (action.type) {
     case "ADD_TASK":
@@ -18,3 +26,19 @@ function taskReducer(state, action) {
       return state;
   }
 }
+
+export const TaskProvider = ({ children }) => {
+  const [state, dispatch] = useReducer(taskReducer, initialState);
+
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(state.tasks));
+  }, [state.tasks]);
+
+  return (
+    <TaskContext.Provider value={{ state, dispatch }}>
+      {children}
+    </TaskContext.Provider>
+  );
+};
+
+export default TaskContext;
