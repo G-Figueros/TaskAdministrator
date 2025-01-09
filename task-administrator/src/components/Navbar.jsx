@@ -20,55 +20,58 @@ const Navbar = () => {
   ];
 
   return (
-    <Flex
-      bg={colorMode === "light" ? "primary.light" : "primary.dark"}
-      p={4}
-      color={colorMode === "light" ? "text.light" : "text.dark"}
-      align="center"
-      justify="space-between"
-      position="relative"
-    >
-     <NavLink to="/">
-        <Image
-          src="/src/assets/HomeIcon.png"
-          alt="Inicio"
-          width="80px" 
-          height="auto" 
-          borderRadius="full"
-          cursor="pointer"
+    <Box position="fixed" top="0" width="100%" zIndex="1000">
+      <Flex
+        bg={colorMode === "light" ? "primary.light" : "primary.dark"}
+        p={4}
+        color={colorMode === "light" ? "text.light" : "text.dark"}
+        align="center"
+        justify="space-between"
+        boxShadow="md"
+      >
+
+        <NavLink to="/">
+          <Image
+            src="/src/assets/HomeIcon.png"
+            alt="Inicio"
+            width="80px"
+            height="auto"
+            borderRadius="full"
+            cursor="pointer"
+          />
+        </NavLink>
+
+        <HStack spacing={8} justify="center" flex={1}>
+          {navItems.map((item) => (
+            <NavLink
+              key={item.name}
+              to={item.path}
+              style={({ isActive }) => ({
+                padding: "8px 16px",
+                borderRadius: "20px",
+                textDecoration: "none",
+                backgroundColor: isActive
+                  ? colorMode === "light"
+                    ? "rgba(128, 90, 213, 0.2)"
+                    : "rgba(213, 63, 140, 0.2)"
+                  : "transparent",
+                color: "inherit",
+                fontWeight: "bold",
+              })}
+            >
+              {item.name}
+            </NavLink>
+          ))}
+        </HStack>
+
+        <IconButton
+          aria-label="Toggle theme"
+          icon={colorMode === "light" ? <MoonIcon /> : <SunIcon />}
+          onClick={toggleColorMode}
+          colorScheme={colorMode === "light" ? "purple" : "pink"}
         />
-      </NavLink>
-
-      <HStack spacing={8} justify="center" flex={1}>
-        {navItems.map((item) => (
-          <NavLink
-            key={item.name}
-            to={item.path}
-            style={({ isActive }) => ({
-              padding: "8px 16px",
-              borderRadius: "20px",
-              textDecoration: "none",
-              backgroundColor: isActive
-                ? colorMode === "light"
-                  ? "rgba(128, 90, 213, 0.2)" 
-                  : "rgba(213, 63, 140, 0.2)"
-                : "transparent",
-              color: "inherit",
-              fontWeight: isActive ? "bold" : "normal",
-            })}
-          >
-            {item.name}
-          </NavLink>
-        ))}
-      </HStack>
-
-      <IconButton
-        aria-label="Toggle theme"
-        icon={colorMode === "light" ? <MoonIcon /> : <SunIcon />}
-        onClick={toggleColorMode}
-        colorScheme={colorMode === "light" ? "purple" : "pink"}
-      />
-    </Flex>
+      </Flex>
+    </Box>
   );
 };
 

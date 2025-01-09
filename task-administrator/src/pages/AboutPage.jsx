@@ -19,13 +19,12 @@ import CcnaIntroductionToNetworkImage from "../assets/CcnaIntroductionToNetworks
 import SoftwareDevelopmentFundamentalsImage from "../assets/SoftwareDevelopmentFundamentals.png";
 import PythonImage from "../assets/Python.png";
 
-
 const photos = [
-  { src: lifelongLearningImage, alt: "Foto 1", size: "large" },
-  { src: SoftwareDevelopmentFundamentalsImage, alt: "Foto 2", size: "small" },
-  { src: PythonImage, alt: "Foto 3", size: "medium" },
-  { src: RemoteWorkImage, alt: "Foto 4", size: "large" },
-  { src: CcnaIntroductionToNetworkImage, alt: "Foto 5", size: "small" },
+  { src: SoftwareDevelopmentFundamentalsImage, alt: "Foto 2", size: "large", link: "https://www.credly.com/badges/648dc57a-2f5e-4e18-9fa1-e46763886eb3" },
+  { src: PythonImage, alt: "Foto 3", size: "large", link: "https://www.credly.com/badges/a3e35513-c203-489b-bb14-521f445c712c"  },
+  { src: lifelongLearningImage, alt: "Foto 1", size: "large", link: "https://www.credly.com/badges/93521e26-9973-4a6c-8c99-cc14b659d711"  },
+  { src: RemoteWorkImage, alt: "Foto 4", size: "large", link: "https://www.credly.com/badges/59788d14-ca04-45df-bc2e-c5bb86293772"  },
+  { src: CcnaIntroductionToNetworkImage, alt: "Foto 5", size: "large", link: "https://www.credly.com/badges/0597cd2c-f5b8-4ed8-9102-2a629cb5de2d"  },
 ];
 
 const AboutPage = () => {
@@ -137,8 +136,10 @@ const AboutPage = () => {
           </Box>
         </Flex>
       </Flex>
-
-      <Box mt={12} px={8}>
+      <Box mt={6} px={8}>
+        <Heading size="3xl" textAlign="center" mb={10}>
+          Certificaciones Recientes
+        </Heading>
         <Flex wrap="wrap" justify="center" gap={6}>
           {photos.map((photo, index) => (
             <motion.div
@@ -151,19 +152,21 @@ const AboutPage = () => {
                 boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
               }}
             >
-              <motion.img
-                src={photo.src}
-                alt={photo.alt}
-                loading="lazy"
-                style={{
-                  width: photo.size === "large" ? "300px" : photo.size === "medium" ? "200px" : "150px",
-                  height: "auto",
-                  objectFit: "cover",
-                }}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.8, delay: index * 0.2 }}
-              />
+              <a href={photo.link} target="_blank" rel="noopener noreferrer">
+                <motion.img
+                  src={photo.src}
+                  alt={photo.alt}
+                  loading="lazy"
+                  style={{
+                    width: photo.size === "large" ? "300px" : "200px",
+                    height: "auto",
+                    objectFit: "cover",
+                  }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.8, delay: index * 0.2 }}
+                />
+              </a>
             </motion.div>
           ))}
         </Flex>
